@@ -32,7 +32,7 @@ export default class ProductDetail{
 
     document.getElementById("productPrice").textContent = `$${product.FinalPrice}`
     document.getElementById("productColor").textContent = product.Colors.ColorName;
-    document.getElementById("productDesription").textContent = product.DescriptionHtmlSimple;
+    document.getElementById("productDescription").innerHTML = product.DescriptionHtmlSimple;
 
     document.getElementById("addToCart").dataset.id = product.Id
 
