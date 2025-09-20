@@ -156,6 +156,10 @@ button {
   padding: 1rem;
 }
 
+.product-icon{
+  width: 200px;
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
