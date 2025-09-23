@@ -3,20 +3,20 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 export default class ProductDetail{
   constructor(productId, dataSouce) {
     this.productId = productId;
-    this.dataSource = dataSouce;
     this.product = {};
+    this.dataSource = dataSouce;
   }
 
   async init(){
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    document.getElementById("addToCart")
+    document.getElementById("add-to-cart")
       .addEventListener("click", this.addToCart.bind(this));
   }
 
   addToCart(product){
     const items = getLocalStorage("so-cart") || [];
-    items.push(product);
+    items.push(this.product);
     setLocalStorage("so-cart", items);
   }
 
@@ -27,14 +27,14 @@ export default class ProductDetail{
     document.getElementById("productName").textContent = product.NameWithoutBrand;
 
     const image = document.getElementById("productImage")
-    image.src = product.Image;
+    image.src = product.Images.PrimaryExtraLarge;
     image.alt = product.Name;
 
     document.getElementById("productPrice").textContent = `$${product.FinalPrice}`
     document.getElementById("productColor").textContent = product.Colors.ColorName;
     document.getElementById("productDescription").innerHTML = product.DescriptionHtmlSimple;
 
-    document.getElementById("addToCart").dataset.id = product.Id
+    document.getElementById("add-to-cart").dataset.id = product.Id
 
   }
 
