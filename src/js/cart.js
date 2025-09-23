@@ -19,11 +19,40 @@ function cartItemTemplate(item, index) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p  class="cart-card__quantity">qty: 
+    <span data-id="${index}" class="minus">-</span> 
+    <span data-id="${index}" class="qty">1</span> 
+    <span data-id="${index}" class="plus">+</span> </p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
   return newItem;
+}
+
+function changeQuantity(element, operation){
+  const value = parseInt(element.textContent);
+
+  if (operation === "add"){
+    element.textContent = `${value + 1}`;
+  } else if (operation === "subtract"){
+    element.textContent = `${value - 1}`;
+  } else {
+    throw new Error("Invalid operation");
+  }
+}
+
+function quantityButton(){
+  document.querySelectorAll(".minus").forEach((minus) => {
+    minus.addEventListener("click", () => {
+      changeQuantity(document.querySelector(`.qty[data-id="${minus.dataset.id}"]`), "subtract");
+    })
+  })
+  document.querySelectorAll(".plus").forEach((plus) => {
+    plus.addEventListener("click", () => {
+      changeQuantity(document.querySelector(`.qty[data-id="${plus.dataset.id}"]`), "add");
+    })
+  })
+
 }
 
 function removeFromCart(index){
@@ -50,3 +79,4 @@ renderCartContents();
 
 removeButton();
 
+quantityButton();
