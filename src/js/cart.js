@@ -11,7 +11,7 @@ function cartItemTemplate(item, index) {
   <span class="remove" data-id="${index}">X</span>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
